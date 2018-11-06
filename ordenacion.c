@@ -94,7 +94,8 @@ int SelectSortInv(int* tabla, int ip, int iu)
 
 
 
-int mergesort(int* tabla, int ip, int iu){
+int mergesort(int* tabla, int ip, int iu)
+{
 
   int im = 0;
 
@@ -116,7 +117,8 @@ int mergesort(int* tabla, int ip, int iu){
 
 
 /*  CDE */
-int merge(int* tabla, int ip, int iu, int imedio){
+int merge(int* tabla, int ip, int iu, int imedio)
+{
 
   int i, j, k;
   int *t_aux;
@@ -155,3 +157,79 @@ int merge(int* tabla, int ip, int iu, int imedio){
   return 1;
 
 }
+
+
+int quicksort(int* tabla, int ip, int iu)
+{
+
+	int *medio=NULL;
+	int ob=0;
+
+	if (!tabla || ip<0 || iu<0){	
+		return ERR;
+		}
+
+
+	if (ip<iu){
+		return ERR;
+		}
+	if (ip==iu){
+		return 0;
+		}
+	else  {
+		ob+=partir(tabla,ip,iu,medio);
+
+		if( ip < (*medio-1))
+			quicksort(tabla,ip,*medio-1);
+		if((*medio+1)< iu)
+			quicksort(tabla,*medio+1,iu);
+
+		}
+
+	return ob;
+}
+
+
+int partir(int* tabla, int ip, int iu, int *pos)
+{
+	int k;
+	int i;
+	int ob;
+	int j;
+
+	if(!tabla || ip < 0 || iu < 0)
+			return ERR;
+
+	ob=medio(tabla,ip,iu, pos);
+
+	k=tabla[*pos];
+
+	swap(*pos, ip, tabla);
+
+
+	for(i=(ip+1), ob=0, j=*pos; i<=iu; i++){
+		ob++;
+		if (tabla[i]<k){
+			j++;
+			swap(i, j, tabla);
+ 		}
+	}
+	swap(ip,j,tabla);
+
+	*pos=j;	
+
+	return ob;
+}
+
+
+int medio(int *tabla, int ip, int iu,int *pos)
+{
+
+	if (!tabla || ip < 0 || iu < 0){
+		return ERR;
+		}
+
+	*pos=ip;
+
+	return 0;}
+
