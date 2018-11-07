@@ -169,6 +169,10 @@ int quicksort(int* tabla, int ip, int iu)
 		return ERR;
 		}
 
+	medio=(int *)malloc(sizeof(int));
+	if(!medio)
+		return ERR;
+
 
 	if (ip<iu){
 		return ERR;
@@ -197,7 +201,7 @@ int partir(int* tabla, int ip, int iu, int *pos)
 	int ob;
 	int j;
 
-	if(!tabla || ip < 0 || iu < 0)
+	if(!tabla || ip < 0 || iu < 0 || !pos)
 			return ERR;
 
 	ob=medio(tabla,ip,iu, pos);
