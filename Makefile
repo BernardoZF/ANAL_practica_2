@@ -3,6 +3,7 @@
 # Se asume que los ficheros fuente se llaman ejercicio1.c, ejercicio2.c,...,ordenar.h
 #-----------------------
 
+
 CC = gcc -ansi -pedantic
 CFLAGS = -Wall -g
 EXE = ejercicio1 ejercicio2 ejercicio3 ejercicio4 ejercicio5

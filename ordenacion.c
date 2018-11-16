@@ -197,6 +197,7 @@ int quicksort(int* tabla, int ip, int iu)
 }
 
 
+
 int partir(int* tabla, int ip, int iu, int *pos)
 {
 	int k;
