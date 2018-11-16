@@ -174,10 +174,11 @@ int quicksort(int* tabla, int ip, int iu)
 		return ERR;
 
 
-	if (ip<iu){
+	if (iu<ip){
 		return ERR;
 		}
 	if (ip==iu){
+		free(medio);
 		return 0;
 		}
 	else  {
@@ -189,6 +190,8 @@ int quicksort(int* tabla, int ip, int iu)
 			quicksort(tabla,*medio+1,iu);
 
 		}
+
+	free(medio);
 
 	return ob;
 }
@@ -235,5 +238,30 @@ int medio(int *tabla, int ip, int iu,int *pos)
 
 	*pos=ip;
 
-	return 0;}
+	return 0;
+}
+
+int quicksort_src(int* tabla, int ip, int iu)
+{
+
+	int ob=0;
+	int im;
+
+	if (!tabla || ip<0 || iu < ip){	
+		return ERR;
+		}
+
+	if (ip==iu){
+		return 0;
+		}
+	else  {
+		while (ip<iu){
+			ob+=partir(tabla,ip,iu,&im);
+			ob+=quicksort(tabla,ip,im);
+			ip=im+1;
+			}
+		}
+
+	return ob;
+}
 
