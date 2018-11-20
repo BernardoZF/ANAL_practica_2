@@ -54,10 +54,10 @@ int main(int argc, char** argv)
   printf("\n");
 
 
-  ret = quicksort_src(perm, 0, tamano-1);
+  ret = mergesort(perm, 0, tamano-1);
 
   if (ret == ERR) {
-    printf("Error: Error en QuickSort\n");
+    printf("Error: Error en MergeSort\n");
     free(perm);
     exit(-1);
   }

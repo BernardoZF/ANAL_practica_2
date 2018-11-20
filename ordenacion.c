@@ -94,39 +94,56 @@ int SelectSortInv(int* tabla, int ip, int iu)
 
 
 
-int mergesort(int* tabla, int ip, int iu)
-{
+int mergesort(int* tabla, int ip, int iu){
 
   int im = 0;
+  int num_ob = 0;
+  int numob_Left = 0;
+  int numob_Right = 0;
 
   if( tabla == NULL || ip < 0 || ip > iu){
     return ERR;
   }
 
   if ( ip == iu ){
-    return 0;
+    return OK;
   }
   else{
     im = (iu + ip) / 2;
-    mergesort(tabla, ip, im);
-    mergesort(tabla, im+1, iu);
-    return merge(tabla, ip, iu, im);
+    numob_Right = mergesort(tabla, ip, im);
+    if ( numob_Right == ERR){
+      return ERR;
+    }
+    numob_Left = mergesort(tabla, im+1, iu);
+    if ( numob_Left == ERR){
+      return ERR;
+    }
+    num_ob = merge(tabla, ip, iu, im);
+    if ( num_ob == ERR){
+      return ERR;
+    }
   }
+  num_ob = num_ob + numob_Right + numob_Left;
 
+
+  return num_ob;
 }
 
 
-/*  CDE */
-int merge(int* tabla, int ip, int iu, int imedio)
-{
+int merge(int* tabla, int ip, int iu, int imedio){
 
   int i, j, k;
+  int num_ob = 0;
   int *t_aux;
 
 
   t_aux=malloc((iu-ip+1)*sizeof(int));
+  if ( t_aux == NULL ){
+    return ERR;
+  }
 
   for (i = ip, j = imedio+1, k = 0; i <= imedio && j <=iu; k++ ){
+    num_ob++;
     if ( tabla[i] < tabla[j]){
       t_aux[k] = tabla[i];
       i++;
@@ -153,8 +170,7 @@ int merge(int* tabla, int ip, int iu, int imedio)
   memcpy(tabla+ip,t_aux,(iu-ip+1)*sizeof(int));
   free(t_aux);
 
-
-  return 1;
+  return num_ob;
 
 }
 
@@ -192,6 +208,7 @@ int quicksort(int* tabla, int ip, int iu)
 		}
 
 	free(medio);
+	
 
 	return ob;
 }
@@ -262,6 +279,7 @@ int quicksort_src(int* tabla, int ip, int iu)
 			ip=im+1;
 			}
 		}
+
 
 	return ob;
 }
